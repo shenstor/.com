@@ -1,0 +1,3422 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر الشناوي - الفوط السحرية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap');
+        
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #6366f1;
+            --dark-color: #4338ca;
+            --light-color: #eef2ff;
+            --white: #ffffff;
+            --black: #000000;
+            --gray: #6b7280;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--white);
+            color: var(--black);
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: var(--white);
+        }
+
+        /* Layout */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode header {
+            background-color: #2d2d2d;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .dark-mode .logo h1 {
+            color: var(--secondary-color);
+        }
+
+        /* Navigation */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--black);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .dark-mode .nav-links a {
+            color: var(--white);
+        }
+
+        .dark-mode .nav-links a::after {
+            background-color: var(--secondary-color);
+        }
+
+        /* Header Actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-actions button {
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            color: var(--black);
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .dark-mode .header-actions button {
+            color: var(--white);
+        }
+
+        .header-actions button:hover {
+            color: var(--primary-color);
+        }
+
+        .dark-mode .header-actions button:hover {
+            color: var(--secondary-color);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dark-mode .cart-count {
+            background-color: var(--secondary-color);
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100%;
+            background-color: var(--white);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            transition: right 0.3s ease;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .dark-mode .mobile-menu {
+            background-color: #2d2d2d;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--black);
+        }
+
+        .dark-mode .close-menu {
+            color: var(--white);
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            margin-top: 3rem;
+        }
+
+        .mobile-menu li {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--black);
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .dark-mode .mobile-menu a {
+            color: var(--white);
+        }
+
+        .mobile-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .dark-mode .mobile-menu a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Search Overlay */
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1002;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .search-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .search-box {
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1.25rem 1.5rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-box button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        .close-search {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .close-search:hover {
+            transform: rotate(90deg);
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background-color: var(--white);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dark-mode .cart-sidebar {
+            background-color: #2d2d2d;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dark-mode .cart-header {
+            border-bottom: 1px solid #444;
+        }
+
+        .cart-header h3 {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+        }
+
+        .dark-mode .cart-header h3 {
+            color: var(--secondary-color);
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--black);
+            transition: transform 0.3s;
+        }
+
+        .dark-mode .close-cart {
+            color: var(--white);
+        }
+
+        .close-cart:hover {
+            transform: rotate(90deg);
+        }
+
+        .cart-items {
+            flex: 1;
+            padding: 1.25rem;
+            overflow-y: auto;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--gray);
+        }
+
+        .cart-empty i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        .cart-item {
+            display: flex;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid #eee;
+            gap: 1rem;
+        }
+
+        .dark-mode .cart-item {
+            border-bottom: 1px solid #444;
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .cart-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-price {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .dark-mode .cart-item-price {
+            color: var(--secondary-color);
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            background-color: var(--light-color);
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .dark-mode .quantity-btn {
+            background-color: #444;
+            color: white;
+        }
+
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 0.25rem;
+            padding: 0.25rem;
+        }
+
+        .dark-mode .quantity-input {
+            background-color: #444;
+            border-color: #555;
+            color: white;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: var(--danger-color);
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .cart-footer {
+            padding: 1.25rem;
+            border-top: 1px solid #eee;
+            background-color: var(--white);
+        }
+
+        .dark-mode .cart-footer {
+            border-top: 1px solid #444;
+            background-color: #2d2d2d;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .cart-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .cart-btn-continue,
+        .cart-btn-checkout {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .cart-btn-continue {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+        }
+
+        .dark-mode .cart-btn-continue {
+            background-color: #444;
+            color: var(--secondary-color);
+        }
+
+        .cart-btn-checkout {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .dark-mode .cart-btn-checkout {
+            background-color: var(--secondary-color);
+        }
+
+        .cart-btn-continue:hover {
+            background-color: #dbeafe;
+        }
+
+        .dark-mode .cart-btn-continue:hover {
+            background-color: #555;
+        }
+
+        .cart-btn-checkout:hover {
+            background-color: var(--dark-color);
+        }
+
+        .dark-mode .cart-btn-checkout:hover {
+            background-color: #2563eb;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: var(--white);
+            padding: 6rem 0 4rem;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .dark-mode .hero {
+            background: linear-gradient(135deg, #1e3a8a, #0f172a);
+        }
+
+        .hero h2 {
+            font-size: 2.25rem;
+            margin-bottom: 1.25rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.75rem;
+            background-color: var(--white);
+            color: var(--primary-color);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .dark-mode .btn {
+            background-color: var(--dark-color);
+            color: var(--white);
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 0;
+            scroll-margin-top: 70px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            font-size: 2rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .dark-mode .section-title {
+            color: var(--secondary-color);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 0.75rem auto 0;
+            border-radius: 2px;
+        }
+
+        .dark-mode .section-title::after {
+            background-color: var(--secondary-color);
+        }
+
+        /* Categories */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            background-color: var(--white);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .dark-mode .category-card {
+            background-color: #2d2d2d;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .category-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .category-card:hover .category-img img {
+            transform: scale(1.1);
+        }
+
+        .category-info {
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .category-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-size: 1.25rem;
+        }
+
+        .dark-mode .category-info h3 {
+            color: var(--secondary-color);
+        }
+
+        .category-info p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Products */
+        .products {
+            background-color: var(--light-color);
+        }
+
+        .dark-mode .products {
+            background-color: #252525;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .dark-mode .product-card {
+            background-color: #2d2d2d;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background-color: var(--danger-color);
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            z-index: 1;
+        }
+
+        .product-price {
+            position: absolute;
+            bottom: 0.75rem;
+            right: 0.75rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            font-size: 1rem;
+            z-index: 1;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+        }
+
+        .dark-mode .product-price {
+            background-color: var(--secondary-color);
+        }
+
+        .product-info {
+            padding: 1.25rem;
+        }
+
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            color: var(--warning-color);
+            gap: 0.25rem;
+        }
+
+        .product-rating span {
+            color: var(--gray);
+            margin-right: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .dark-mode .product-rating span {
+            color: #ccc;
+        }
+
+        .product-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dark-mode .product-features {
+            border-bottom: 1px solid #444;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.9rem;
+        }
+
+        .feature i {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+
+        .dark-mode .feature i {
+            color: var(--secondary-color);
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--dark-color);
+        }
+
+        .dark-mode .add-to-cart {
+            background-color: var(--secondary-color);
+        }
+
+        .dark-mode .add-to-cart:hover {
+            background-color: #2563eb;
+        }
+
+        /* Featured Products */
+        .featured-products {
+            position: relative;
+        }
+
+        .featured-products .section-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Payment Methods */
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .method-card {
+            background-color: var(--white);
+            border-radius: 0.75rem;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .dark-mode .method-card {
+            background-color: #2d2d2d;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .method-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .method-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .dark-mode .method-icon {
+            color: var(--secondary-color);
+        }
+
+        .method-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .method-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 4rem 0 1.5rem;
+        }
+
+        .dark-mode footer {
+            background-color: var(--dark-color);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.25rem;
+            font-size: 1.25rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .footer-column p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            display: block;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+
+        .dark-mode .back-to-top {
+            background-color: var(--secondary-color);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Page Loader */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .dark-mode .page-loader {
+            background-color: #1a1a1a;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--light-color);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .dark-mode .loader-spinner {
+            border-color: #2d2d2d;
+            border-top-color: var(--secondary-color);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: transparent;
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0;
+            transition: width 0.1s;
+        }
+
+        .dark-mode .progress-bar {
+            background-color: var(--secondary-color);
+        }
+
+        /* Animations */
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(50px);
+            }
+        }
+
+        /* Magic Towels Section */
+        .magic-towels {
+            background-color: #f8fafc;
+        }
+
+        .dark-mode .magic-towels {
+            background-color: #1e1e1e;
+        }
+
+        .magic-towels .section-title {
+            color: #7c3aed;
+        }
+
+        .dark-mode .magic-towels .section-title {
+            color: #8b5cf6;
+        }
+
+        .magic-towels .section-title::after {
+            background-color: #7c3aed;
+        }
+
+        .dark-mode .magic-towels .section-title::after {
+            background-color: #8b5cf6;
+        }
+
+        /* Special Offers */
+        .special-offers {
+            background-color: #fff7ed;
+        }
+
+        .dark-mode .special-offers {
+            background-color: #2a2a2a;
+        }
+
+        .special-offers .section-title {
+            color: #ea580c;
+        }
+
+        .dark-mode .special-offers .section-title {
+            color: #f97316;
+        }
+
+        .special-offers .section-title::after {
+            background-color: #ea580c;
+        }
+
+        .dark-mode .special-offers .section-title::after {
+            background-color: #f97316;
+        }
+
+        /* Coming Soon Section */
+        .coming-soon {
+            text-align: center;
+            padding: 4rem 0;
+            background-color: #f8fafc;
+        }
+
+        .dark-mode .coming-soon {
+            background-color: #1e1e1e;
+        }
+
+        .coming-soon-icon {
+            font-size: 4rem;
+            color: #7c3aed;
+            margin-bottom: 1.5rem;
+        }
+
+        .dark-mode .coming-soon-icon {
+            color: #8b5cf6;
+        }
+
+        .coming-soon h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #7c3aed;
+        }
+
+        .dark-mode .coming-soon h2 {
+            color: #8b5cf6;
+        }
+
+        .coming-soon p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* أنماط جديدة لقسم الاتصال */
+        .contact {
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            background-color: var(--light-color);
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .dark-mode .info-item {
+            background-color: #333;
+        }
+        
+        .info-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-item i {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+        }
+        
+        .dark-mode .info-item i {
+            color: var(--secondary-color);
+        }
+        
+        .info-item span {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        /* تعديلات الفوتر */
+        .footer-content {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 3rem;
+        }
+        
+        .footer-column:first-child {
+            order: 1;
+        }
+        
+        .footer-column h3::after {
+            right: 50%;
+            transform: translateX(50%);
+        }
+        
+        .social-links {
+            justify-content: center;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+                text-align: right;
+            }
+            
+            .footer-column:first-child {
+                order: 0;
+            }
+            
+            .footer-column h3::after {
+                right: 0;
+                transform: none;
+            }
+            
+            .social-links {
+                justify-content: flex-start;
+            }
+        }
+
+        /* Product Modal */
+        .product-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1002;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .product-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 0.75rem;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .dark-mode .modal-content {
+            background-color: #2d2d2d;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--black);
+        }
+
+        .dark-mode .close-modal {
+            color: var(--white);
+        }
+
+        .modal-product {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .modal-product-img {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
+
+        .modal-product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-product-info h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .dark-mode .modal-product-info h2 {
+            color: var(--secondary-color);
+        }
+
+        .modal-product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .dark-mode .modal-product-price {
+            color: var(--secondary-color);
+        }
+
+        .modal-product-description {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .modal-add-to-cart {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+
+        .modal-add-to-cart:hover {
+            background-color: var(--dark-color);
+        }
+
+        .dark-mode .modal-add-to-cart {
+            background-color: var(--secondary-color);
+        }
+
+        .dark-mode .modal-add-to-cart:hover {
+            background-color: #2563eb;
+        }
+
+        @media (min-width: 768px) {
+            .modal-product {
+                flex-direction: row;
+            }
+            
+            .modal-product-img {
+                width: 50%;
+            }
+            
+            .modal-product-info {
+                width: 50%;
+                padding: 0 1.5rem;
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .header-content {
+                padding: 0.75rem 0;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .categories-grid,
+            .products-grid,
+            .methods-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .header-actions {
+                gap: 0.75rem;
+            }
+            
+            .hero {
+                padding: 5rem 0 3rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.75rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            /* تحسينات للهواتف */
+            .products-grid,
+            .methods-grid,
+            .categories-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 1rem;
+                padding-bottom: 1rem;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            
+            .products-grid::-webkit-scrollbar,
+            .methods-grid::-webkit-scrollbar,
+            .categories-grid::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .product-card,
+            .method-card,
+            .category-card {
+                min-width: 85%;
+                scroll-snap-align: start;
+                flex-shrink: 0;
+            }
+            
+            /* تحسينات الفوتر للهواتف */
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-column {
+                text-align: center;
+            }
+            
+            .footer-column h3::after {
+                right: 50%;
+                transform: translateX(50%);
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            /* تحسينات القائمة الجانبية */
+            .cart-sidebar {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 4rem 0 2rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.5rem;
+            }
+            
+            .product-card,
+            .method-card,
+            .category-card {
+                min-width: 90%;
+            }
+            
+            .back-to-top {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            font-size: 30px;
+            text-decoration: none;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Special Badge for Magic Towels */
+        .magic-badge {
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
+            background-color: #7c3aed;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            z-index: 1;
+        }
+
+        .dark-mode .magic-badge {
+            background-color: #8b5cf6;
+        }
+        .payment-methods {
+            text-align: center;
+            padding: 4rem 0;
+            background-color: #f8fafc;
+        }
+        
+        .dark-mode .payment-methods {
+            background-color: #1e1e1e;
+        }
+        
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .method-card {
+            background-color: var(--white);
+            border-radius: 1rem;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border: 1px solid #eee;
+        }
+        
+        .dark-mode .method-card {
+            background-color: #2d2d2d;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-color: #444;
+        }
+        
+        .method-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .method-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.75rem;
+            color: var(--primary-color);
+        }
+        
+        .dark-mode .method-icon {
+            background-color: #333;
+            color: var(--secondary-color);
+        }
+        
+        .method-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+        }
+        
+        .dark-mode .method-card h3 {
+            color: var(--secondary-color);
+        }
+        
+        .method-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Loader -->
+    <div class="page-loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>متجر الشناوي</h1>
+                </div>
+
+                <ul class="nav-links">
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#coming-soon">الأدوات المنزليه</a></li>
+                    <li><a href="#magic-towels">الفوط السحرية</a></li>
+                    <li><a href="#offers">العروض الخاصة</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                </ul>
+
+                <div class="header-actions">
+                    <button id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button id="cartBtn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                    <button id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" id="closeMenu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="#home">الرئيسية</a></li>
+            <li><a href="#coming-soon">الأدوات المنزليه</a></li>
+            <li><a href="#magic-towels">الفوط السحرية</a></li>
+            <li><a href="#offers">العروض الخاصة</a></li>
+            <li><a href="#contact">اتصل بنا</a></li>
+        </ul>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <button class="close-search" id="closeSearch">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="search-box">
+            <button>
+                <i class="fas fa-search"></i>
+            </button>
+            <input type="text" placeholder="ابحث عن منتجات...">
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>سلة التسوق</h3>
+            <button class="close-cart" id="closeCart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="cart-items">
+            <div class="cart-empty">
+                <i class="fas fa-shopping-cart"></i>
+                <p>سلة التسوق فارغة</p>
+            </div>
+            <!-- Cart items will be added dynamically -->
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>المجموع</span>
+                <span class="total-price">0.00 ج.م</span>
+            </div>
+            <div class="cart-buttons">
+                <button class="cart-btn-continue">متابعة التسوق</button>
+                <button class="cart-btn-checkout">إتمام الشراء</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="product-modal" id="productModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-product">
+                <div class="modal-product-img">
+                    <img id="modalProductImage" src="" alt="">
+                </div>
+                <div class="modal-product-info">
+                    <h2 id="modalProductTitle"></h2>
+                    <div class="modal-product-price" id="modalProductPrice"></div>
+                    <div class="modal-product-description" id="modalProductDescription">
+                        <p>هذا المنتج من أفضل المنتجات المتاحة لدينا، مصنوع من مواد عالية الجودة لضمان الأداء الممتاز.</p>
+                        <p>يمكنك استخدامه لجميع الأغراض المنزلية بسهولة وأمان.</p>
+                    </div>
+                    <button class="modal-add-to-cart" id="modalAddToCart">
+                        <i class="fas fa-shopping-cart"></i>
+                        أضف إلى السلة
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>مرحباً بكم في متجر الشناوي</h2>
+            <p>أفضل الفوط السحرية بجودة عالية وأسعار تنافسية</p>
+            <a href="#magic-towels" class="btn">تصفح المنتجات</a>
+        </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section class="coming-soon" id="coming-soon">
+        <div class="container">
+            <i class="fas fa-clock coming-soon-icon"></i>
+            <h2>الأدوات المنزلية</h2>
+            <p>سيتم إضافة منتجات الأدوات المنزلية قريباً بإذن الله</p>
+        </div>
+    </section>
+
+    <!-- Magic Towels Section -->
+    <section class="magic-towels" id="magic-towels">
+        <div class="container">
+            <h2 class="section-title">الفوط السحرية</h2>
+            <div class="products-grid">
+                <!-- الفوطة الثلاثية -->
+                <div class="product-card" data-id="1" data-name="الفوطة الثلاثية" data-price="348" data-image="https://i.postimg.cc/W4PsXyb9/384.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/W4PsXyb9/384.jpg" alt="الفوطة الثلاثية">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">348 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>الفوطة الثلاثية</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(56)</span>
+                        </div>
+                        <div class="product-features">
+                            
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>قابلة للغسل</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- القرص البرتقالي -->
+                <div class="product-card" data-id="2" data-name="القرص البرتقالي" data-price="240" data-image="https://i.postimg.cc/C5ymNnW3/240.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/C5ymNnW3/240.jpg" alt="القرص البرتقالي">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">240 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>القرص البرتقالي</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(38)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لجميع الأسطح</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>تنظيف عميق</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- القرص الصوف -->
+                <div class="product-card" data-id="3" data-name="القرص الصوف" data-price="240" data-image="https://i.postimg.cc/15GS4HKw/240.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/15GS4HKw/240.jpg" alt="القرص الموف">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">240 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>القرص الموف</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(47)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لطيف على الأسطح</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>امتصاص عالي</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- فوطة الزجاج -->
+                <div class="product-card" data-id="4" data-name="فوطة الزجاج" data-price="200" data-image="https://i.postimg.cc/C17DFDQg/200.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/C17DFDQg/200.jpg" alt="فوطة الزجاج">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">200 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>فوطة الزجاج</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(42)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>خالية من الوبر</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>تنظيف بدون خطوط</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- فوطة الأطباق -->
+                <div class="product-card" data-id="5" data-name="فوطة الأطباق" data-price="120" data-image="https://i.postimg.cc/yxNRWdMS/120.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/yxNRWdMS/120.jpg" alt="فوطة الأطباق">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">120 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>فوطة الأطباق</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(35)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لجميع أنواع الأطباق</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>امتصاص سريع</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- فوطة الوجه اليومية -->
+                <div class="product-card" data-id="6" data-name="فوطة الوجه اليومية" data-price="140" data-image="https://i.postimg.cc/TYpm6Kjz/140.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/TYpm6Kjz/140.jpg" alt="فوطة الوجه اليومية">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">140 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>فوطة الوجه اليومية</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(28)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>للبشرة الحساسة</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>ناعمة على البشرة</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- solt taue naphin -->
+                <div class="product-card" data-id="7" data-name="solt taue naphin" data-price="140" data-image="https://i.postimg.cc/1tmnYX5Y/solt-taue-naphim-140.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/1tmnYX5Y/solt-taue-naphim-140.jpg" alt="solt taue naphin">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">140 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>solt taue naphin</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(19)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>متعدد الاستخدامات</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>تنظيف عميق</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- دواسة الباب -->
+
+
+                <!-- فوطة لتقشير الوجه و الرقبة و الديكولتيه -->
+                <div class="product-card" data-id="9" data-name=" قفاز لتقشير الوجه و الرقبة و الديكولتيه" data-price="260" data-image="https://i.postimg.cc/tg57Pbtd/260.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/tg57Pbtd/260.jpg" alt="قفاز لتقشير الوجه و الرقبة و الديكولتيه">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">260 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>قفاز لتقشير الوجه و الرقبة و الديكولتيه</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(24)</span>
+                        </div>
+                        <div class="product-features">
+                           
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>تقشير لطيف</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- scratch glove -->
+                <div class="product-card" data-id="10" data-name="scratch glove" data-price="488" data-image="https://i.postimg.cc/zvLf9gmp/scratch-glove-488.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/zvLf9gmp/scratch-glove-488.jpg" alt="scratch glove">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">488 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>scratch glove</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(17)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لتنظيف الأسطح</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>مقاومة للخدش</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- فوطة النظارة -->
+                <div class="product-card" data-id="11" data-name="فوطة النظارة" data-price="80" data-image="https://i.postimg.cc/rybs5QWH/80.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/rybs5QWH/80.jpg" alt="فوطة النظارة">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">80 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>فوطة النظارة</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(22)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لتنظيف النظارات</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>خالية من الخدوش</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- فوطه الموبايل -->
+                <div class="product-card" data-id="12" data-name="فوطه الموبايل" data-price="104" data-image="https://i.postimg.cc/PfBZdt6N/104.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/PfBZdt6N/104.jpg" alt="فوطه الموبايل">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">104 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>فوطه الموبايل</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(15)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لتنظيف الشاشات</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>آمنة على الأجهزة</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- فوطه الشعر -->
+                <div class="product-card" data-id="13" data-name="قبعة الشعر" data-price="580" data-image="https://i.postimg.cc/5NV0Pj75/580.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/5NV0Pj75/580.jpg" alt="قبعة الشعر">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">580 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>قبعة الشعر</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(27)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لتنشيف الشعر</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>ناعمة على الشعر</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- فوطه استخدام مرة واحدة -->
+                <div class="product-card" data-id="14" data-name="فوطه استخدام مرة واحدة" data-price="520" data-image="https://i.postimg.cc/1XZ9YYHR/520.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/1XZ9YYHR/520.jpg" alt="فوطه استخدام مرة واحدة">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">520 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>فوطه استخدام مرة واحدة</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(21)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>للاستخدام الفردي</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>صحية ونظيفة</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- فوطه السيارة المتوسطة -->
+                <div class="product-card" data-id="15" data-name="فوطه السيارة المتوسطة" data-price="448" data-image="https://i.postimg.cc/1RpRNsm8/448.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/1RpRNsm8/448.jpg" alt="فوطه السيارة المتوسطة">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">448 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>فوطه السيارة المتوسطة</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(18)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لتنظيف السيارات</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>امتصاص عالي</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- فوطه السيارة الكبيرة -->
+                <div class="product-card" data-id="16" data-name="فوطه السيارة الكبيرة" data-price="720" data-image="https://i.postimg.cc/NfDgpDrY/720.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/NfDgpDrY/720.jpg" alt="فوطه السيارة الكبيرة">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">720 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>فوطه السيارة الكبيرة</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(23)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لتنظيف السيارات</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>حجم كبير</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- فوطه الاسكرتش -->
+                <div class="product-card" data-id="17" data-name=" فوطه الاسكراتش " data-price="240" data-image="https://i.postimg.cc/ZR6m3xhG/240.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/ZR6m3xhG/240.jpg" alt=" فوطه الاسكراتش ">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">240 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>فوطه الاسكراتش </h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(19)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لتنظيف الأسطح</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>مقاومة للخدش</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- سنوج الاسكرتش الثلاثية -->
+                <div class="product-card" data-id="18" data-name="سنوج الاسكراتش الثلاثية" data-price="384" data-image="https://i.postimg.cc/L6xpzsr8/384.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/L6xpzsr8/384.jpg" alt="سنوج الاسكراتش الثلاثية">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">384 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>سنوج الاسكراتش  الثلاثية</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(25)</span>
+                        </div>
+                        <div class="product-features">
+
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لتنظيف الأسطح</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- الچوانتي الاسكرتش -->
+                
+
+                <!-- الچوانتي الصوف -->
+                <div class="product-card" data-id="20" data-name="الچوانتي الموف" data-price="448" data-image="https://i.postimg.cc/wTjKTp78/448.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/wTjKTp78/448.jpg" alt="الچوانتي الموف">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">448 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>الچوانتي الموف</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(22)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لحماية اليدين</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>ناعمة ومريحة</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- الچوانتي البرتقالي -->
+                <div class="product-card" data-id="21" data-name="الچوانتي البرتقالي" data-price="448" data-image="https://i.postimg.cc/W1dQgwG5/448.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/W1dQgwG5/448.jpg" alt="الچوانتي البرتقالي">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">448 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>الچوانتي البرتقالي</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(24)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لحماية اليدين</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>مقاومة للماء</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- الچوانتي سوبنج -->
+                <div class="product-card" data-id="22" data-name="ديوتي سبونج" data-price="240" data-image="https://i.postimg.cc/6qHmG8ys/240.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/6qHmG8ys/240.jpg" alt="ديوتي سبونج">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">240 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>ديوتي سبونج</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(18)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لتنظيف بالصابون</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لحماية اليدين</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- فوطه السيارة بي -->
+               
+
+                <!-- فوطه السيارة بي -->
+               
+                <!-- silicone micro brush -->
+                <div class="product-card" data-id="25" data-name="silicone micro brush" data-price="480" data-image="https://i.postimg.cc/3w7FYKx2/silicone-micro-brush-480.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/3w7FYKx2/silicone-micro-brush-480.jpg" alt="silicone micro brush">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">480 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>silicone micro brush</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(16)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لتنظيف الدقيق</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>من السيليكون</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- beauty glove -->
+                <div class="product-card" data-id="26" data-name="beauty glove" data-price="420" data-image="https://i.postimg.cc/8zghm1Wx/bauty-glove-420.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/8zghm1Wx/bauty-glove-420.jpg" alt="beauty glove">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">420 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>beauty glove</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(19)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>للعناية بالبشرة</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>ناعمة على البشرة</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- bauty glove -->
+                <div class="product-card" data-id="27" data-name="bauty glove" data-price="420" data-image="https://i.postimg.cc/zBQhb58t/beauty-glove-420.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/zBQhb58t/beauty-glove-420.jpg" alt="bauty glove">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">420 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>bauty glove</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(21)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>للعناية بالبشرة</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لون مختلف</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- bath glove -->
+                <div class="product-card" data-id="28" data-name="bath glove" data-price="384" data-image="https://i.postimg.cc/ht8VCH1v/bath-glove-384.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/ht8VCH1v/bath-glove-384.jpg" alt="bath glove">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">384 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>bath glove</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(17)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>للاستحمام</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>تقشير لطيف</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- دواسة لإزالة الميكب -->
+                <div class="product-card" data-id="29" data-name="ولبيد لازالة الميكياج" data-price="200" data-image="https://i.postimg.cc/vT9vGDfL/200.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/vT9vGDfL/200.jpg" alt="ولبيد لازالة الميكياج">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">200 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>ولبيد لازالة الميكياج</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(23)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لإزالة المكياج</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لطيفة على البشرة</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- فوطه للاستخدام -->
+
+
+                <!-- قفاز تنظيف المنزل -->
+                <div class="product-card" data-id="31" data-name="قفاز تنظيف المنزل" data-price="360" data-image="https://i.postimg.cc/hvF9Zg6J/360.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/hvF9Zg6J/360.jpg" alt="قفاز تنظيف المنزل">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">360 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>قفاز تنظيف المنزل</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(20)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لتنظيف المنزل</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>حماية لليدين</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- extra car towel -->
+                <div class="product-card" data-id="32" data-name="extra car towel" data-price="720" data-image="https://i.postimg.cc/x8KLWhV6/extra-car-towel-720.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/x8KLWhV6/extra-car-towel-720.jpg" alt="extra car towel">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">720 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>extra car towel</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(22)</span>
+                        </div>
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>لتنظيف السيارات</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>حجم إضافي</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+
+                <!-- منشفة قهوة و حليب -->
+                <div class="product-card" data-id="33" data-name="منديل قهوة و حليب" data-price="80" data-image="https://i.postimg.cc/jjLPsLrw/80.jpg">
+                    <div class="product-img">
+                        <img src="https://i.postimg.cc/jjLPsLrw/80.jpg" alt="منديل قهوة و حليب">
+                        <span class="magic-badge">سحرية</span>
+                        <span class="product-price">80 ج.م</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>منديل قهوة و حليب</h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(26)</span>
+                        </div>
+                        <div class="product-features">
+                            
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>امتصاص عالي</span>
+                            </div>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            أضف إلى السلة
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="coming-soon" id="offers">
+        <div class="container">
+            <i class="fas fa-clock coming-soon-icon"></i>
+            <h2>العروض الخاصة</h2>
+            <p>سيتم إضافة عروض رائعة قريباً بإذن الله</p>
+        </div>
+    </section>
+    <section class="payment-methods">
+        <div class="container">
+            <h2 class="section-title">طرق الدفع </h2>
+            <div class="methods-grid">
+                <div class="method-card">
+                    <div class="method-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>الدفع عند الاستلام</h3>
+                    <p>ادفع عند استلام طلبك بسهولة وأمان</p>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-icon">
+                        <i class="fas fa-wallet payment-icon"></i>
+                    </div>
+                    <h3>الدفع انستا باي</h3>
+                    <p>دفع آمن عبر انستا باي</p>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-icon">
+                        <i class="fas fa-mobile-alt payment-icon"></i>
+                    </div>
+                    <h3>فودافون كاش</h3>
+                    <p>دفع تمن التوصيل فقط او التمن كاملا</p>
+                </div>
+
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">اتصل بنا</h2>
+            <div class="contact-info">
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+20 123 456 7890</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@alshenawi-store.com</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>مصر</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>متجر الشناوي</h3>
+                    <p>متجر متخصص في بيع الفوط السحرية بجودة عالية وأسعار تنافسية.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#coming-soon">الأدوات المنزلية</a></li>
+                        <li><a href="#magic-towels">الفوط السحرية</a></li>
+                        <li><a href="#offers">العروض الخاصة</a></li>
+                        <li><a href="#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>خدمة العملاء</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">حسابي</a></li>
+                        <li><a href="#">تتبع الطلب</a></li>
+                        <li><a href="#">سياسة الإرجاع</a></li>
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">شروط الاستخدام</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 متجر الشناوي. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/201234567890" class="whatsapp-btn" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+    <script>
+        // Page Loader
+        window.addEventListener('load', function() {
+            const pageLoader = document.querySelector('.page-loader');
+            setTimeout(() => {
+                pageLoader.classList.add('hidden');
+            }, 1000);
+        });
+    
+        // Progress Bar
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollProgress = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollProgress + '%';
+        });
+    
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+    
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const overlay = document.getElementById('overlay');
+        const closeMenu = document.getElementById('closeMenu');
+    
+        menuToggle.addEventListener('click', function() {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    
+        closeMenu.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    
+        overlay.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    
+        // Search Toggle
+        const searchBtn = document.getElementById('searchBtn');
+        const searchOverlay = document.getElementById('searchOverlay');
+        const closeSearch = document.getElementById('closeSearch');
+    
+        searchBtn.addEventListener('click', function() {
+            searchOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    
+        closeSearch.addEventListener('click', function() {
+            searchOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    
+        // Cart Toggle
+        const cartBtn = document.getElementById('cartBtn');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const closeCart = document.getElementById('closeCart');
+    
+        cartBtn.addEventListener('click', function() {
+            cartSidebar.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    
+        closeCart.addEventListener('click', function() {
+            cartSidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+    
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+    
+        // Cart Functionality
+        const addToCartBtns = document.querySelectorAll('.add-to-cart');
+        const cartCount = document.querySelector('.cart-count');
+        const cartItemsContainer = document.querySelector('.cart-items');
+        const totalPriceElement = document.querySelector('.total-price');
+        const cartContinueBtn = document.querySelector('.cart-btn-continue');
+        const cartCheckoutBtn = document.querySelector('.cart-btn-checkout');
+    
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let totalPrice = 0;
+    
+        // Initialize cart on page load
+        updateCart();
+        updateCartCount();
+    
+        // Add to cart functionality
+        addToCartBtns.forEach((btn) => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent triggering the product card click
+                
+                const productCard = this.closest('.product-card');
+                const productId = parseInt(productCard.getAttribute('data-id'));
+                const productTitle = productCard.getAttribute('data-name');
+                const productPrice = parseFloat(productCard.getAttribute('data-price'));
+                const productImage = productCard.querySelector('.product-img img').src;
+                
+                const existingItem = cart.find(item => item.id === productId);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: productId,
+                        name: productTitle,
+                        price: productPrice,
+                        image: productImage,
+                        quantity: 1
+                    });
+                }
+                
+                // Save to localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+                
+                updateCart();
+                updateCartCount();
+                
+                // Show success message
+                showNotification(`تمت إضافة "${productTitle}" إلى السلة بنجاح`, 'success');
+            });
+        });
+    
+        // Modal Add to Cart
+        const modalAddToCart = document.getElementById('modalAddToCart');
+        modalAddToCart.addEventListener('click', function() {
+            const productId = parseInt(this.getAttribute('data-id'));
+            const productTitle = document.getElementById('modalProductTitle').textContent;
+            const productPrice = parseFloat(document.getElementById('modalProductPrice').textContent.replace(' ج.م', ''));
+            const productImage = document.getElementById('modalProductImage').src;
+            
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: productTitle,
+                    price: productPrice,
+                    image: productImage,
+                    quantity: 1
+                });
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            updateCart();
+            updateCartCount();
+            
+            // Show success message
+            showNotification(`تمت إضافة "${productTitle}" إلى السلة بنجاح`, 'success');
+            
+            // Close modal
+            document.getElementById('productModal').classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    
+        // Update cart count
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+        }
+    
+        // Update cart items
+        function updateCart() {
+            cartItemsContainer.innerHTML = '';
+            totalPrice = 0;
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="cart-empty">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>سلة التسوق فارغة</p>
+                    </div>
+                `;
+                totalPriceElement.textContent = '0.00 ج.م';
+                return;
+            }
+            
+            cart.forEach(item => {
+                totalPrice += item.price * item.quantity;
+                
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'cart-item';
+                cartItemElement.innerHTML = `
+                    <div class="cart-item-img">
+                        <img src="${item.image}" alt="${item.name}">
+                    </div>
+                    <div class="cart-item-details">
+                        <h4 class="cart-item-title">${item.name}</h4>
+                        <span class="cart-item-price">${item.price.toFixed(2)} ج.م</span>
+                        <div class="cart-item-actions">
+                            <div class="quantity-control">
+                                <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                                <input type="text" class="quantity-input" value="${item.quantity}" readonly>
+                                <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                            </div>
+                            <button class="remove-item" data-id="${item.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                cartItemsContainer.appendChild(cartItemElement);
+            });
+            
+            // Update total price
+            totalPriceElement.textContent = totalPrice.toFixed(2) + ' ج.م';
+            
+            // Add event listeners to quantity buttons
+            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    const itemIndex = cart.findIndex(item => item.id === productId);
+                    
+                    if (itemIndex !== -1) {
+                        if (cart[itemIndex].quantity > 1) {
+                            cart[itemIndex].quantity -= 1;
+                        } else {
+                            cart.splice(itemIndex, 1);
+                        }
+                        
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        updateCart();
+                        updateCartCount();
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    const itemIndex = cart.findIndex(item => item.id === productId);
+                    
+                    if (itemIndex !== -1) {
+                        cart[itemIndex].quantity += 1;
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        updateCart();
+                        updateCartCount();
+                    }
+                });
+            });
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    cart = cart.filter(item => item.id !== productId);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCart();
+                    updateCartCount();
+                    
+                    showNotification('تمت إزالة المنتج من السلة', 'success');
+                });
+            });
+        }
+    
+        // Continue shopping button
+        cartContinueBtn.addEventListener('click', function() {
+            cartSidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    
+        // Checkout button
+        cartCheckoutBtn.addEventListener('click', function() {
+            window.location.href = 'cart.html'; // توجيه المستخدم إلى صفحة cart.html
+        });
+    
+        // Show notification function
+        function showNotification(message, type = 'success') {
+            // Remove any existing notifications
+            const oldNotifications = document.querySelectorAll('.custom-notification');
+            oldNotifications.forEach(notif => notif.remove());
+            
+            const notification = document.createElement('div');
+            notification.className = 'custom-notification';
+            notification.textContent = message;
+            
+            // Style the notification
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.padding = '15px 25px';
+            notification.style.borderRadius = '5px';
+            notification.style.zIndex = '10000';
+            notification.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            notification.style.transition = 'all 0.3s ease';
+            notification.style.fontFamily = 'Tajawal, sans-serif';
+            
+            // Customize based on type
+            if (type === 'success') {
+                notification.style.backgroundColor = '#4CAF50';
+                notification.style.color = 'white';
+            } else if (type === 'error') {
+                notification.style.backgroundColor = '#F44336';
+                notification.style.color = 'white';
+            } else {
+                notification.style.backgroundColor = '#2196F3';
+                notification.style.color = 'white';
+            }
+            
+            document.body.appendChild(notification);
+            
+            // Show notification smoothly
+            setTimeout(() => {
+                notification.style.opacity = '1';
+            }, 10);
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+    
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mobileMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // Product Modal Functionality
+        const productCards = document.querySelectorAll('.product-card');
+        const productModal = document.getElementById('productModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalProductImage = document.getElementById('modalProductImage');
+        const modalProductTitle = document.getElementById('modalProductTitle');
+        const modalProductPrice = document.getElementById('modalProductPrice');
+
+        productCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const productId = this.getAttribute('data-id');
+                const productName = this.getAttribute('data-name');
+                const productPrice = this.getAttribute('data-price');
+                const productImage = this.querySelector('.product-img img').src;
+                
+                modalProductImage.src = productImage;
+                modalProductImage.alt = productName;
+                modalProductTitle.textContent = productName;
+                modalProductPrice.textContent = productPrice + ' ج.م';
+                modalAddToCart.setAttribute('data-id', productId);
+                
+                productModal.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeModal.addEventListener('click', function() {
+            productModal.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        overlay.addEventListener('click', function() {
+            if (productModal.classList.contains('active')) {
+                productModal.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+</html>

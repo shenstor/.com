@@ -1863,8 +1863,7 @@
             });
             
             orderMessage += `%0A*المجموع الجزئي:* ${subtotal.toFixed(2)} ج.م%0A`;
-            orderMessage += `*تكلفة التوصيل:* 30.00 ج.م%0A`;
-            orderMessage += `*المجموع الكلي:* ${(subtotal + 30).toFixed(2)} ج.م`;
+            orderMessage += `*المجموع الكلي:* ${(subtotal ).toFixed(2)} ج.م`;
             
             // إرسال الرسالة عبر واتساب
             const whatsappNumber = '201014708433';

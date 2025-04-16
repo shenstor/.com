@@ -1503,8 +1503,8 @@
                         <span class="subtotal-price">0.00 ج.م</span>
                     </div>
                     <div class="summary-row">
-                        <span> التوصيل حسب المنطقة</span>
-                        <span class="shipping-price">0</span>
+                        <span> التوصيل </span>
+                        <span class="shipping-price">30</span>
                     </div>
                     <div class="summary-row total">
                         <span>المجموع الكلي</span>
@@ -1655,7 +1655,7 @@
     
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         let totalPrice = 0;
-        const shippingPrice = 0;
+        const shippingPrice = 30;
     
         // Sample product data
         const products = [
@@ -1863,7 +1863,8 @@
             });
             
             orderMessage += `%0A*المجموع الجزئي:* ${subtotal.toFixed(2)} ج.م%0A`;
-            orderMessage += `*المجموع الكلي:* ${(subtotal ).toFixed(2)} ج.م`;
+            orderMessage += `*تكلفة التوصيل:* 30.00 ج.م%0A`;
+            orderMessage += `*المجموع الكلي:* ${(subtotal + 30).toFixed(2)} ج.م`;
             
             // إرسال الرسالة عبر واتساب
             const whatsappNumber = '201014708433';
